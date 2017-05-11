@@ -42,3 +42,5 @@ Thumbs.db
 /style.css
 /assets/maps/
 /libs/
+/public/uploads
+.env
