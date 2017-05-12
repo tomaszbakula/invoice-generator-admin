@@ -10,7 +10,8 @@ router.use('/users', auth.unless({
   path: [{ url: '/api/users', methods: ['POST'] }]
 }), require('./users'));
 
-// router.use('/invoices', require('./invoices'));
+router.use('/invoices', auth, require('./invoices'));
+
 // router.use('/clients', require('./clients'));
 
 module.exports = router;

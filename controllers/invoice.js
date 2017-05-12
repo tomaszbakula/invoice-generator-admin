@@ -1,24 +1,25 @@
 var Invocie = require('../models/invoice');
-// TODO: req.dbUser = user
+
+/* Preload invoice data method. */
 function load(req, res, next, id) {
   Invoice.findById(id).exec(function (err, invoice) {
-    req.dbUser = user;
+    req.dbInvoice = invoice;
   });
 }
 
+/* List all invoices. */
 function list(req, res, next) {
-  Invocie.find({ userId: req.user.id }).exec(function (err, invoices) {
+  Invocie.find().exec((err, invoices) => {
     if (err) { return next(err); }
     res.json(invoices);
   });
 }
 
+/* Create new invoice */
 function create(req, res, next) {
-
   Invocie.create({
     userId: req.user.id,
-    clientId: req.body.clientId,
-    number: 1,
+    number: req.body.number,
     items: [
       { name: 'Opony', price: '20', qty: 4 },
       { name: 'Opony zimowe', price: '30', qty: 2 }
@@ -27,7 +28,6 @@ function create(req, res, next) {
     if (err) { return next(err); }
     res.json(invoice);
   });
-
 }
 
 function get(req, res, next) {}
