@@ -17,17 +17,13 @@ function list(req, res, next) {
 
 /* Create new invoice */
 function create(req, res, next) {
-  Invocie.create({
-    userId: req.user.id,
-    number: req.body.number,
-    items: [
-      { name: 'Opony', price: '20', qty: 4 },
-      { name: 'Opony zimowe', price: '30', qty: 2 }
-    ]
-  }, function (err, invoice) {
-    if (err) { return next(err); }
-    res.json(invoice);
-  });
+  // Add user id.
+  req.body.userId = req.user.id
+
+  Invocie.create(req.body)
+  .then((savedInvoice) => {
+    return res.json(savedInvoice);
+  }, (err) => next(err));
 }
 
 function get(req, res, next) {}
