@@ -9,7 +9,8 @@ function load(req, res, next, id) {
 
 /* List all invoices. */
 function list(req, res, next) {
-  Invocie.find().exec((err, invoices) => {
+  Invocie.find({ userId: req.user.id })
+  .exec((err, invoices) => {
     if (err) { return next(err); }
     res.json(invoices);
   });
