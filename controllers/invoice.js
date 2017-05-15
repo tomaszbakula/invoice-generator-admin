@@ -34,7 +34,17 @@ function get(req, res, next) {
   return res.json(req.dbInvoice);
 }
 
-function update(req, res, next) {}
+
+function update(req, res, next) {
+  const invoice = req.dbInvoice;
+  Object.assign(invoice, req.body);
+
+  invoice.save(err => {
+    if (err) return next(err);
+    res.sendStatus(204);
+  });
+}
+
 function remove(req, res, next) {}
 
 

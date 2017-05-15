@@ -60,7 +60,7 @@ function update(req, res, next) {
   });
 }
 
-// TODO: User - create remove method.
+// TODO: User - remove method.
 function remove(req, res, next) {}
 
 module.exports = { load, list, create, get, update, remove }
