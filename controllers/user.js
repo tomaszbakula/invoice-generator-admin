@@ -60,7 +60,10 @@ function update(req, res, next) {
   });
 }
 
-// TODO: User - remove method.
-function remove(req, res, next) {}
+/* Remove user. */
+function remove(req, res, next) {
+  const user = req.dbUser;
+  user.remove().then(() => res.sendStatus(204), err => next(err));
+}
 
 module.exports = { load, list, create, get, update, remove }
