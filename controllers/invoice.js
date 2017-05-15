@@ -34,7 +34,7 @@ function get(req, res, next) {
   return res.json(req.dbInvoice);
 }
 
-
+/* Update invoice. */
 function update(req, res, next) {
   const invoice = req.dbInvoice;
   Object.assign(invoice, req.body);
