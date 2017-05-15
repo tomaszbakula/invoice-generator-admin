@@ -45,7 +45,11 @@ function update(req, res, next) {
   });
 }
 
-function remove(req, res, next) {}
+/* Remove invoice. */
+function remove(req, res, next) {
+  const invoice = req.dbInvoice;
+  invoice.remove().then(() => res.sendStatus(204), err => next(err));
+}
 
 
 module.exports = { load, list, create, get, update, remove }
