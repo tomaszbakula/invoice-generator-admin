@@ -1,4 +1,5 @@
 var Invoice = require('../models/invoice');
+var Client = require('../models/client');
 
 /* Preload invoice data method. */
 function load(req, res, next, id) {
@@ -20,13 +21,27 @@ function list(req, res, next) {
 
 /* Create new invoice */
 function create(req, res, next) {
-  // Add user id.
+  // Add user id to reqest.
   req.body.userId = req.user.id
 
   Invoice.create(req.body)
-  .then(savedInvoice => {
-    return res.json(savedInvoice);
-  }, err => next(err));
+  .then(invoice => {
+
+    // Add new client.
+    if (!req.body.clientId) {
+      Client.create(req.body.client)
+      .then(client => {
+        invoice.client.id = client._id
+        invoice.save()
+
+        return res.json(invoice)
+      }, err => next(err))
+    }
+    else {
+      return res.json(invoice)
+    }
+
+  }, err => next(err))
 }
 
 /* Get invoice. */
