@@ -47,7 +47,8 @@ var InvoiceSchema = new Schema({
     name: String,
     price: Number,
     qty: Number
-  }]
+  }],
+  total: Number
 });
 
 module.exports = mongoose.model('Invoice', InvoiceSchema);
