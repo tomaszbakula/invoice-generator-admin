@@ -12,11 +12,24 @@ function load(req, res, next, id) {
 
 /* List all invoices. */
 function list(req, res, next) {
+  let limit = 2
+  let offset = req.query.page * limit
+
   Invoice.find({ userId: req.user.id })
+  .skip(offset)
+  .limit(limit)
+  .sort('-issueDate')
   .exec((err, invoices) => {
     if (err) { return next(err); }
-    res.json(invoices);
-  });
+
+    // NOTE: I'm not sure if this is the best way to handle pagination.
+    Invoice.count({ userId: req.user.id }).then(count => {
+      count = Math.ceil(count / limit)
+      invoices.push({ count: count  })
+
+      res.json(invoices)
+    })
+  })
 }
 
 /* Create new invoice */
