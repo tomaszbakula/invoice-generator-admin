@@ -12,7 +12,7 @@ function load(req, res, next, id) {
 
 /* List all invoices. */
 function list(req, res, next) {
-  let limit = 2
+  let limit = 10
   let offset = req.query.page * limit
 
   Invoice.find({ userId: req.user.id })
