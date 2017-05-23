@@ -18,7 +18,7 @@ function list(req, res, next) {
   Invoice.find({ userId: req.user.id })
   .skip(offset)
   .limit(limit)
-  .sort('-issueDate')
+  .sort('-_id')
   .exec((err, invoices) => {
     if (err) { return next(err); }
 
