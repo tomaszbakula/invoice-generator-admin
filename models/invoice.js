@@ -7,10 +7,6 @@ var InvoiceSchema = new Schema({
     required: true,
     ref: 'users'
   },
-  clientId: {
-    type: Schema.Types.ObjectId,
-    ref: 'users'
-  },
   company: {
     name: String,
     phone: String,
