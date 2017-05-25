@@ -41,12 +41,10 @@ function create(req, res, next) {
   .then(invoice => {
 
     // Add new client.
-    if (!req.body.client._id) {
-      delete req.body.client._id
-      
+    if (!req.body.client.id) {
       Client.create(req.body.client)
       .then(client => {
-        invoice.client._id = client._id
+        invoice.client.id = client._id
         invoice.save()
 
         return res.json(invoice)
