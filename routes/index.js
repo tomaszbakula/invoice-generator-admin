@@ -12,6 +12,6 @@ router.use('/users', auth.unless({
 
 router.use('/invoices', auth, require('./invoices'));
 
-// router.use('/clients', require('./clients'));
+router.use('/clients', require('./clients'));
 
 module.exports = router;
