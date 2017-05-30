@@ -5,6 +5,9 @@
   "scripts": {
     "dev": "nodemon ./bin/www"
   },
+  "engines": {
+    "node": "7.10.0"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "~1.17.1",
