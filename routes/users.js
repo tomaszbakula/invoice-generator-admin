@@ -1,6 +1,7 @@
 var express = require('express'),
     router = express.Router();
 var User = require('../controllers/user');
+var Auth = require('../controllers/auth');
 
 var multer  = require('multer')
 var crypto = require('crypto');
@@ -25,7 +26,7 @@ router.route('/')
   /* GET /api/users - Get list of users. */
   .get(User.list)
   /* POST /api/users - Create new user. */
-  .post(User.create);
+  .post(User.create, Auth.generateToken, Auth.respondJWT);
 
 router.route('/:userId')
   /* GET /api/users/:userId - Get user. */

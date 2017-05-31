@@ -35,7 +35,8 @@ function create(req, res, next) {
   },
   function (err, user) {
     if (err) { return next(err); }
-    res.json(user);
+    req.user = user;
+    next();
   });
 }
 
